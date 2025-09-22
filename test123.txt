@@ -10,10 +10,8 @@ pipeline {
         }
         stage('Hello') {
             steps {
-                git credentialsId: 'e984f9cc-5c15-4813-837d-c66536425160', url: 'https://github.com/awstrainersz/gitdemoaug.git'
-                sh 'cat helloworld.txt'
                 echo 'Hello World'
             }
         }
     }
-}did 
+}
