@@ -36,7 +36,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'mysecret', variable: 'mysecret')]) {
     // some block
-                    echo mysecret
+                    echo "Hello Student"
                 }
             }
         }
