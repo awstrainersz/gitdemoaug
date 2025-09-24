@@ -1,9 +1,14 @@
 pipeline {
     agent any
-    tools {nodejs "mynodejs"}
-    environment {
-        Node_env="prod"
+
+    tools {
+        nodejs 'mynodejs'
     }
+
+    environment {
+        Node_env = 'prod'
+    }
+
     stages {
         stage('Git repo') {
             steps {
@@ -13,19 +18,27 @@ pipeline {
         }
         stage('Hello') {
             steps {
-                echo Node_env
+                echo "${env.Node_env}"
                 echo 'Hello World'
             }
         }
         stage('mynodejs stage') {
-              steps {
+            steps {
                 sh 'npm install'
             }
+        }
         stage('My-artifact') {
-              steps {
+            steps {
                 archiveArtifacts artifacts: '*', followSymlinks: false
             }
         }
+        stage('My Secret') {
+            steps {
+                withCredentials([string(credentialsId: 'mysecret', variable: 'mysecret')]) {
+    // some block
+                    echo mysecret
+                }
+            }
+        }
     }
-}
 }
